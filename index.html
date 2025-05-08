@@ -5,15 +5,45 @@
   <title>Aadit's Website</title>
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <script src="script.js"></script>
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
-  <header>
-    <h1>Hello, I'm Aadit Gupta</h1>
-    <p>Welcome to my personal website.</p>
+  <header class="header">
+
+    <a href="#" class="logo">Aadit.</a>
+
+    <div class="bx bx-menu" id="menu-icon"></div>
+    
+  
+
+    <nav class="navbar">
+      <a href="#home" class="active">Home</a>
+      <a href="#about">About</a>
+      <a href="#education">Education</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </nav>
   </header>
 
-  <section id="About">
+  <section class="home" id="home">
+    <div class="home-content">
+      <h1>Hello, I'm <span>Aadit Gupta</span></h1>
+      <div class="text-animate">
+        <h3>Frontend Developer</h3>
+      </div>
+
+      <p>Welcome to my personal website.</p>
+
+      <div class="btn-box">
+        <a href="#" class="btn">Hire Me</a>
+        <a href="#" class="btn">Let's Talk</a>
+      </div>
+    </div>
+  </section>
+
+
+
+  <section id="about">
     <h2>About Me</h2>
     <p>I'm a developer/designer/creator passionate about building awesome stuff.</p>
   </section>
@@ -26,7 +56,7 @@
     </ul>
   </section>
 
-  <section>
+  <section id="contact">
     <h2>Contact</h2>
     <p><i class="fa-solid fa-envelope"></i> Email: <a href=mailto:"aadit.gupta@mail.utoronto.ca">aadit.gupta@mail.utoronto.ca</a></p>
     <p><i class="fa-brands fa-linkedin"></i> LinkedIn: <a href="https://www.linkedin.com/in/aadit-gupta-1411ag" target="_blank">Aadit Gupta</a></p>
@@ -35,5 +65,10 @@
   <footer>
     <p>&copy; 2025 Aadit Gupta</p>
   </footer>
+  
+
+
+  <script src="script.js"></script>
+
 </body>
 </html>
