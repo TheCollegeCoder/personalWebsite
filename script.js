@@ -22,32 +22,103 @@
 // observer.observe(document.querySelector('.skills'));
 
 
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    const bars = entry.target.querySelectorAll('.progress');
+// const observer = new IntersectionObserver((entries) => {
+//   entries.forEach(entry => {
+//     const bars = entry.target.querySelectorAll('.progress');
 
-    if (entry.isIntersecting) {
-      // Animate in
-      bars.forEach(progress => {
-        const percentText = progress.querySelector('h3 span').innerText;
-        const percentValue = percentText.replace('%', '');
-        const bar = progress.querySelector('.bar span');
-        bar.style.width = percentValue + '%';
-      });
-    } 
-    // else {
-    //   // Reset when out of view
-    //   bars.forEach(progress => {
-    //     const bar = progress.querySelector('.bar span');
-    //     bar.style.width = '0%';
-    //   });
-    // }
+//     if (entry.isIntersecting) {
+//       // Animate in
+//       bars.forEach(progress => {
+//         const percentText = progress.querySelector('h3 span').innerText;
+//         const percentValue = percentText.replace('%', '');
+//         const bar = progress.querySelector('.bar span');
+//         bar.style.width = percentValue + '%';
+//       });
+//     } 
+//     // else {
+//     //   // Reset when out of view
+//     //   bars.forEach(progress => {
+//     //     const bar = progress.querySelector('.bar span');
+//     //     bar.style.width = '0%';
+//     //   });
+//     // }
+//   });
+// }, {
+//   threshold: .3,
+// });
+
+// observer.observe(document.querySelector('.skills'));
+
+// const skillsSection = document.querySelector('.skills');
+// const skillBars = document.querySelectorAll('.skills .bar span');
+
+// const observer = new MutationObserver(mutations => {
+//   mutations.forEach(mutation => {
+//     if (
+//       mutation.type === 'attributes' &&
+//       skillsSection.classList.contains('show-animate')
+//     ) {
+//       // Delay the animation slightly after class is added
+//       setTimeout(() => {
+//         document.querySelectorAll('.skills .progress').forEach(progress => {
+//           const percent = progress.querySelector('h3 span').innerText.replace('%', '');
+//           progress.querySelector('.bar span').style.width = percent + '%';
+//         });
+//       }, 2000); // adjust delay if needed
+//     }
+
+//     // Optional: reset animation when class is removed
+//     if (
+//       mutation.type === 'attributes' &&
+//       !skillsSection.classList.contains('show-animate')
+//     ) {
+//       skillBars.forEach(bar => bar.style.width = '0%');
+//     }
+//   });
+// });
+
+// // Observe class changes on .skills
+// observer.observe(skillsSection, {
+//   attributes: true,
+//   attributeFilter: ['class']
+// });
+
+const skillsSection = document.querySelector('.skills');
+const skillBars = document.querySelectorAll('.skills .bar span');
+
+const observer = new MutationObserver(mutations => {
+  mutations.forEach(mutation => {
+    if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+      const isVisible = skillsSection.classList.contains('show-animate');
+
+      if (isVisible) {
+        // Animate bars in
+        setTimeout(() => {
+          document.querySelectorAll('.skills .progress').forEach(progress => {
+            const percent = progress.querySelector('h3 span').innerText.replace('%', '');
+            const bar = progress.querySelector('.bar span');
+            bar.style.width = percent + '%';
+          });
+        }, 3000); // optional delay
+      } else {
+        // Reset bars with reflow
+        skillBars.forEach(bar => {
+          bar.style.transition = 'none';      // Temporarily disable transition
+          bar.style.width = '0%';             // Reset
+          void bar.offsetWidth;               // Force reflow
+          bar.style.transition = 'width 1s ease-in-out';  // Re-enable animation
+        });
+      }
+    }
   });
-}, {
-  threshold: .3,
 });
 
-observer.observe(document.querySelector('.skills'));
+observer.observe(skillsSection, {
+  attributes: true,
+  attributeFilter: ['class']
+});
+
+
 
 
 let menuIcon = document.querySelector('#menu-icon');
@@ -76,10 +147,10 @@ window.onscroll = () => {
       });
       sec.classList.add('show-animate');
     } 
-    // else{
-    //   sec.classList.remove('show-animate');
+    else{
+      sec.classList.remove('show-animate');
       
-    // }
+    }
 
   });
 
