@@ -55,7 +55,11 @@ a:visited {
     font-size: 2.5rem;
     color: var(--text-color);
     font-weight: 600;
-     
+    position: relative;
+}
+
+.navbar {
+    position: relative;
 }
 
 .navbar a {
@@ -72,6 +76,7 @@ a:visited {
 }
 
 #menu-icon {
+    position: relative;
     font-size: 3.6rem;
     color: var(--text-color);
     cursor: pointer;
@@ -100,6 +105,8 @@ section {
 }
 
 .home-content h1 {
+    position: relative;
+    display: inline-block;
     font-size: 5.6rem;
     font-weight: 700;
     line-height: 1.3;
@@ -123,6 +130,9 @@ section {
     background-repeat: no-repeat;
     -webkit-background-clip: text;
     background-position: -33rem 0;
+}
+
+.home.show-animate .home-content .text-animate h3 {
     animation: homeBgText 6s linear infinite;
     animation-delay: 2s;
 }
@@ -136,11 +146,15 @@ section {
     height: 100%;
     border-right: 2px solid var(--main-color);
     z-index: -1;
+}
+
+.home.show-animate .home-content .text-animate h3::before {
     animation: homeCursorText 6s linear infinite;
     animation-delay: 2s;
 }
 
 .home-content p {
+    position: relative;
     font-size: 1.6rem;
     margin: 2rem 0 4rem;
 }
@@ -284,6 +298,7 @@ footer {
 }
 
 .heading {
+    position: relative;
     font-size: 5rem;
     margin-bottom: 3rem;
     text-align: center;
@@ -322,6 +337,7 @@ span {
     border-bottom: .2rem solid var(--second-bg-color);
     border-left: .2rem solid var(--main-color);
     border-right: .2rem solid var(--main-color);
+    animation: aboutSpinner 8s linear infinite;
 }
 
 .about-content {
@@ -329,10 +345,13 @@ span {
 }
 
 .about-content h3 {
+    position: relative;
+    display: inline-block; 
     font-size: 2.6rem;
 }
 
 .about-content p {
+    position: relative;
     font-size: 1.6rem;
     margin: 2rem 0 3rem;
 }
@@ -368,11 +387,13 @@ span {
 }
 
 .education-column .title {
+    position: relative;
     font-size: 2.5rem;
     margin: 0 0 1.5rem 2rem; 
 }
 
 .education-column .education-box {
+    position: relative;
     border-left: .2rem solid var(--main-color);   
 }
 
@@ -443,6 +464,12 @@ span {
     background: var(--second-bg-color);
 }
 
+.skills h2 {
+    display: inline-block;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
 .skills .skills-row {
     display: flex;
     flex-wrap: wrap;
@@ -454,8 +481,14 @@ span {
 }
 
 .skills-column .title {
+    position: relative;
+    display: inline-block;
     font-size: 2.5rem;
     margin: 0 0 1.5rem;
+}
+
+.skills-column .skills-box {
+    position: relative;
 }
 
 .skills-box .skills-content {
@@ -520,6 +553,18 @@ span {
 .contact {
     min-height: auto;
     padding-bottom: 7rem;
+}
+
+.contact h2 {
+    display: inline-block;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.contact .contact-links h3 {
+    display: inline-block;
+    position: relative;
 }
 
 .contact form {
@@ -664,6 +709,11 @@ span {
     background: var(--second-bg-color);
 }
 
+.footer-text,
+.footer-iconTop {
+    position: relative;
+}
+
 .footer .footer-text p {
     font-size: 1.6rem;
 }
@@ -706,6 +756,57 @@ span {
     font-size: 2.7rem;
     color: var(--bg-color);
     transition: .5s;
+}
+
+.animate {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--bg-color);
+    z-index: 98;
+}
+
+.animate.home-img {
+    width: 50%;
+}
+
+.logo .animate,
+.navbar .animate,
+#menu-icon .animate,
+.home.show-animate .animate {
+    animation: showRight 1s ease forwards;
+    animation-delay: calc(.3s * var(--i));
+}
+
+.animate.scroll {
+    transition: 1s ease;
+    transition-delay: calc(.3s / var(--i));
+    animation: none;
+}
+
+section:nth-child(odd) .animate.scroll,
+.footer .animate.scroll {
+    background: var(--second-bg-color);  
+}
+
+.education .education-box .animate.scroll {
+    width: 105%;
+}
+
+.contact .contact-links h3 .animate.scroll {
+    height: 60%;
+    transform: translateY(50%);
+}
+
+.about.show-animate .animate.scroll,
+.education.show-animate .animate.scroll,
+.skills.show-animate .animate.scroll,
+.contact.show-animate .animate.scroll,
+.footer.show-animate .animate.scroll {
+    transition-delay: calc(.3s * var(--i));
+    width: 0;
 }
 
 @media (max-width: 1200px) {
@@ -824,5 +925,17 @@ span {
 
     75%, 81% {
         opacity: 0;
+    }
+}
+
+@keyframes aboutSpinner {
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }    
+}
+
+@keyframes showRight {
+    100% {
+        width: 0%;
     }
 }
